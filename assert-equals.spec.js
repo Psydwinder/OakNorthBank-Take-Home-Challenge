@@ -39,7 +39,7 @@ describe("Comparing object types", () => {
       expect(() => assertEquals({ name: "Niete" }, { name: "Steph" })).toThrow(
         Error
       );
-      expect(() => assertEquals({ name: "Niete" }, { names: "Steph" })).toThrow(
+      expect(() => assertEquals({ name: "Niete" }, { names: "Niete" })).toThrow(
         Error
       );
     });
