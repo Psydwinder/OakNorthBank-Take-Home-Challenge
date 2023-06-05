@@ -66,7 +66,7 @@ describe("when expected and actual are different", () => {
 
     expect(() => {
       try {
-        assertEquals({ name: "Niete" }, "2");
+        assertEquals({ name: "Michael" }, "2");
       } catch (error) {
         console.error("Error:", error.message);
         throw error;
@@ -80,7 +80,7 @@ describe("Comparing object types", () => {
     it("returns an error if the type is different", () => {
       expect(() => {
         try {
-          assertEquals({ name: "Niete" }, null);
+          assertEquals({ name: "Michael" }, null);
         } catch (error) {
           console.error("Error:", error.message);
           throw error;
@@ -88,7 +88,7 @@ describe("Comparing object types", () => {
       }).toThrow(Error);
       expect(() => {
         try {
-          assertEquals({ name: "Niete" }, [1, 2, 3]);
+          assertEquals({ name: "Michael" }, [1, 2, 3]);
         } catch (error) {
           console.error("Error:", error.message);
           throw error;
@@ -96,7 +96,7 @@ describe("Comparing object types", () => {
       }).toThrow(Error);
       expect(() => {
         try {
-          assertEquals({ name: "Niete" }, "1");
+          assertEquals({ name: "Michael" }, "1");
         } catch (error) {
           console.error("Error:", error.message);
           throw error;
@@ -104,7 +104,7 @@ describe("Comparing object types", () => {
       }).toThrow(Error);
       expect(() => {
         try {
-          assertEquals({ name: "Niete" }, 1);
+          assertEquals({ name: "Michael" }, 1);
         } catch (error) {
           console.error("Error:", error.message);
           throw error;
@@ -115,7 +115,7 @@ describe("Comparing object types", () => {
     it("returns an error if both objects do not have the same key values", () => {
       expect(() => {
         try {
-          assertEquals({ name: "Niete" }, { name: "Steph" });
+          assertEquals({ name: "Michael" }, { name: "Jackie" });
         } catch (error) {
           console.error("Error:", error.message);
           throw error;

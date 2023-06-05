@@ -20,7 +20,7 @@ function assertEquals(expected, actual) {
           throw new Error(`Expected key "${key}" not found in actual`);
         } else if (expected[key] !== actual[key]) {
           throw new Error(
-            `The expected object's key "${expected[key]}" is not equal to the actual object's key "${actual[key]}"`
+            `The values are NOT equal. The expected object ${key}: "${expected[key]}" is NOT equal to the actual object ${key}: "${actual[key]}"`
           );
         }
       }
@@ -49,7 +49,9 @@ function assertEquals(expected, actual) {
 
   // Check values
   if (expected !== actual) {
-    throw new Error(`Expected "${expected}" but found "${actual}"`);
+    throw new Error(
+      `Expected ${JSON.stringify(expected)} but found ${JSON.stringify(actual)}`
+    );
   }
 }
 
