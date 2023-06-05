@@ -1,52 +1,126 @@
 const assertEquals = require("./assert-equals");
 
-// Test with String
-try {
-  assertEquals("abc", "abc"); // Passes
-} catch (err) {
-  console.error(err.message);
-}
+describe("Expected and actual are the same", () => {
+  it("returns without throwing an error", () => {
+    expect(() => assertEquals("abc", "abc")).not.toThrow();
+    expect(() => assertEquals("1", "1")).not.toThrow();
+    expect(() => assertEquals(1, 1)).not.toThrow();
+    expect(() => assertEquals([1, 2, 3], [1, 2, 3])).not.toThrow();
+  });
+});
 
-try {
-  assertEquals("abcef", "abc"); // Throws
-} catch (err) {
-  console.error(err.message);
-}
+describe("when expected and actual are different", () => {
+  it("throws an error", () => {
+    expect(() => {
+      try {
+        assertEquals("abcdef", "abc");
+      } catch (error) {
+        console.error("Error:", error.message);
+        throw error;
+      }
+    }).toThrow(Error);
+    expect(() => {
+      try {
+        assertEquals(1, "1");
+      } catch (error) {
+        console.error("Error:", error.message);
+        throw error;
+      }
+    }).toThrow(Error);
 
-// Test with Number
-try {
-  assertEquals(1, 1); // Passes
-} catch (err) {
-  console.error(err.message);
-}
+    expect(() => {
+      try {
+        assertEquals(1, 2);
+      } catch (error) {
+        console.error("Error:", error.message);
+        throw error;
+      }
+    }).toThrow(Error);
 
-try {
-  assertEquals(1, 2); // Throws
-} catch (err) {
-  console.error(err.message);
-}
+    expect(() => {
+      try {
+        assertEquals([1, 2, 3], [1, 3]);
+      } catch (error) {
+        console.error("Error:", error.message);
+        throw error;
+      }
+    }).toThrow(Error);
 
-try {
-  assertEquals(1, "1"); // Throws
-} catch (err) {
-  console.error(err.message);
-}
+    expect(() => {
+      try {
+        assertEquals([1, 2], [1, 3]);
+      } catch (error) {
+        console.error("Error:", error.message);
+        throw error;
+      }
+    }).toThrow(Error);
 
-// Test with Array
-try {
-  assertEquals(["a", "b", "c"], ["a", "b", "c"]); // Passes
-} catch (err) {
-  console.error(err.message);
-}
+    expect(() => {
+      try {
+        assertEquals([1, 2], 2);
+      } catch (error) {
+        console.error("Error:", error.message);
+        throw error;
+      }
+    }).toThrow(Error);
 
-try {
-  assertEquals(["a", "b"], ["a", "b", "c"]); // Throws
-} catch (err) {
-  console.error(err.message);
-}
+    expect(() => {
+      try {
+        assertEquals({ name: "Niete" }, "2");
+      } catch (error) {
+        console.error("Error:", error.message);
+        throw error;
+      }
+    }).toThrow(Error);
+  });
+});
 
-try {
-  assertEquals(["a", "b"], ["a", "d"]); // Throws
-} catch (err) {
-  console.error(err.message);
-}
+describe("Comparing object types", () => {
+  describe("when expected and actual are different, it should throw an error", () => {
+    it("returns an error if the type is different", () => {
+      expect(() => {
+        try {
+          assertEquals({ name: "Niete" }, null);
+        } catch (error) {
+          console.error("Error:", error.message);
+          throw error;
+        }
+      }).toThrow(Error);
+      expect(() => {
+        try {
+          assertEquals({ name: "Niete" }, [1, 2, 3]);
+        } catch (error) {
+          console.error("Error:", error.message);
+          throw error;
+        }
+      }).toThrow(Error);
+      expect(() => {
+        try {
+          assertEquals({ name: "Niete" }, "1");
+        } catch (error) {
+          console.error("Error:", error.message);
+          throw error;
+        }
+      }).toThrow(Error);
+      expect(() => {
+        try {
+          assertEquals({ name: "Niete" }, 1);
+        } catch (error) {
+          console.error("Error:", error.message);
+          throw error;
+        }
+      }).toThrow(Error);
+    });
+
+    it("returns an error if both objects do not have the same key values", () => {
+      expect(() => {
+        try {
+          assertEquals({ name: "Niete" }, { name: "Steph" });
+        } catch (error) {
+          console.error("Error:", error.message);
+          throw error;
+        }
+      }).toThrow(Error);
+    });
+  });
+});

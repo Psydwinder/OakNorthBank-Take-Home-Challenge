@@ -1,4 +1,32 @@
 function assertEquals(expected, actual) {
+  // Check if they are non-array objects
+  if (
+    typeof expected === "object" &&
+    !Array.isArray(expected) &&
+    typeof actual === "object" &&
+    !Array.isArray(actual)
+  ) {
+    const expectedKeys = Object.keys(expected);
+    const actualKeys = Object.keys(actual);
+    if (expectedKeys.length !== actualKeys.length) {
+      throw new Error(
+        `Expected ${JSON.stringify(expected)} and actual ${JSON.stringify(
+          actual
+        )} objects don't have the same length`
+      );
+    } else {
+      for (let key of expectedKeys) {
+        if (actual[key] === undefined) {
+          throw new Error(`Expected key "${key}" not found in actual`);
+        } else if (expected[key] !== actual[key]) {
+          throw new Error(
+            `The expected object's key "${expected[key]}" is not equal to the actual object's key "${actual[key]}"`
+          );
+        }
+      }
+    }
+  }
+
   // Check if they are arrays
   if (Array.isArray(expected) && Array.isArray(actual)) {
     if (expected.length !== actual.length) {
